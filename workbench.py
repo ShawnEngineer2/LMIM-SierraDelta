@@ -1,6 +1,8 @@
 from turtle import clear
 from mimesis.enums import Gender
-import data_engine.builders.customerbuilder as CB
+#import data_engine.builders.customerbuilder as CB
+import traceback as tb
+import services.customerservice as svc
 import data_engine.builders.builder_errors as blderr
 from numpy import random as np_rdm
 from os import system as sys
@@ -8,20 +10,17 @@ from os import system as sys
 
 sys("clear")
 
-#for curr_enum in Gender:
-#    print(type(curr_enum))
-#    print(curr_enum)
+cs = svc.CustomerService()
 
-#print(np_rdm.choice(Gender))
-
-cb = CB.CustomerBuilder()
-
-new_cust = ""
+new_cust = None
 try:
-    new_cust = cb.NewCustomer(cust_type=4, gender=0)
+    #new_cust = cb.NewCustomer(cust_type=4, gender=0)
+    #new_cust = cs.new_random_customer(office_code=0, cust_type=0, gender=5)
 
-except blderr.InvalidParameterValueError as eIPVE:
-    print("Invalid parameter value for parameter ", str(eIPVE))
+    new_cust = cs.empty_customer()
+
+except Exception as excp:
+    tb.print_exception(excp)
 
 
 

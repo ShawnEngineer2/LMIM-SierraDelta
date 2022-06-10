@@ -5,3 +5,4 @@ data_engine/classes/__pycache__/basebuilder.cpython-310.pyc
 data_engine/classes/__pycache__/builder_enums.cpython-310.pyc
 data_engine/classes/__pycache__/builder_errors.cpython-310.pyc
 services/__pycache__/customerservice.cpython-310.pyc
+services/__pycache__/baseservice.cpython-310.pyc

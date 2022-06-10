@@ -2,7 +2,7 @@
 ## then starts the REST server
 
 import uvicorn
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from typing import Optional
 from http import HTTPStatus
 from os import system as sys
