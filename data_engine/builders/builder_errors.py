@@ -7,3 +7,8 @@ class InvalidParameterValueError(Exception):
     def __init__(self, parameter_name:str):
         self.parameter_name = parameter_name
 
+
+class OfficeNotFoundError(Exception):
+
+    def __init__(self):
+        pass

@@ -11,6 +11,9 @@ class BaseBuilder(object):
     def random_from_enum(self, input_enum: Enum)->Enum:
         return np_rdm.choice(input_enum)
 
+    def random_from_list(self, input_list: list)->list:
+        return np_rdm.choice(input_list)
+
     def match_enum_int(self, input_enum:Enum, value_to_find: int)->Enum:
         #Iterate through the enum and if a match is found return it
         for enum in input_enum:
@@ -22,3 +25,6 @@ class BaseBuilder(object):
 
     def throw_invalid_parm_value_exception(self, parameter_name:str):
         return err.InvalidParameterValueError(parameter_name)
+
+    def throw_office_not_found_exception(self):
+        return err.OfficeNotFoundError()
