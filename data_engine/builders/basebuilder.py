@@ -3,6 +3,7 @@
 import data_engine.builders.builder_errors as err
 from enum import Enum
 from numpy import random as np_rdm
+from mimesis.locales import Locale
 
 class BaseBuilder(object):
     def __init__(self):
@@ -22,6 +23,19 @@ class BaseBuilder(object):
 
         #If you get this far, just return None
         return None
+
+    def determine_mimesis_locale(self, cntry_cd: str)->Locale:
+        #This routine maps country codes to Mimesis Locale types
+
+        #Create a dictionary of mappings
+        locale_map = {
+            "USA": Locale.EN,
+            "MEX": Locale.ES_MX,
+            "NLD": Locale.NL,
+            "DEU": Locale.DE,
+        }
+
+        return locale_map.get(cntry_cd.upper(), Locale.EN)
 
     def throw_invalid_parm_value_exception(self, parameter_name:str):
         return err.InvalidParameterValueError(parameter_name)

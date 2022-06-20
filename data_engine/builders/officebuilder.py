@@ -18,16 +18,16 @@ class OfficeBuilder(BaseBuilder):
 
     def gen_mock_data(self):
         #This method generates mock data in the class. Temporary only.
-        self._local_office_data.append({"office_id": 1, "office_name": "Corp HQ", "office_type": 7, "office_status": 3, "addr_country_code": "USA"})
-        self._local_office_data.append({"office_id": 2, "office_name": "Port of Altamira", "office_type": 1, "office_status": 2, "addr_country_code": "MEX"})
-        self._local_office_data.append({"office_id": 3, "office_name": "Port of Ensenada", "office_type": 1, "office_status": 2, "addr_country_code": "MEX"})
-        self._local_office_data.append({"office_id": 4, "office_name": "Port of Manzanillo", "office_type": 1, "office_status": 2, "addr_country_code": "MEX"})
-        self._local_office_data.append({"office_id": 5, "office_name": "Port of Charleston, SC", "office_type": 1, "office_status": 2, "addr_country_code": "USA"})
-        self._local_office_data.append({"office_id": 6, "office_name": "Port of Rotterdam", "office_type": 1, "office_status": 2, "addr_country_code": "NLD"})
-        self._local_office_data.append({"office_id": 7, "office_name": "Port of Hamburg", "office_type": 1, "office_status": 2, "addr_country_code": "DEU"})
-        self._local_office_data.append({"office_id": 8, "office_name": "Jurong Port", "office_type": 1, "office_status": 2, "addr_country_code": "SGP"})
-        self._local_office_data.append({"office_id": 9, "office_name": "Laem Chabang Port", "office_type": 1, "office_status": 2, "addr_country_code": "THA"})
-        self._local_office_data.append({"office_id": 10, "office_name": "Port of Mumbai", "office_type": 1, "office_status": 2, "addr_country_code": "IND"})
+        self._local_office_data.append({"office_id": 1, "office_name": "Corp HQ", "office_type": 7, "office_status": 3, "addr_country_code": "USA", "addr_country": "United States of America"})
+        self._local_office_data.append({"office_id": 2, "office_name": "Port of Altamira", "office_type": 1, "office_status": 2, "addr_country_code": "MEX", "addr_country": "United Mexican States"})
+        self._local_office_data.append({"office_id": 3, "office_name": "Port of Ensenada", "office_type": 1, "office_status": 2, "addr_country_code": "MEX", "addr_country": "United Mexican States"})
+        self._local_office_data.append({"office_id": 4, "office_name": "Port of Manzanillo", "office_type": 1, "office_status": 2, "addr_country_code": "MEX", "addr_country": "United Mexican States"})
+        self._local_office_data.append({"office_id": 5, "office_name": "Port of Charleston, SC", "office_type": 1, "office_status": 2, "addr_country_code": "USA", "addr_country": "United States of America"})
+        self._local_office_data.append({"office_id": 6, "office_name": "Port of Rotterdam", "office_type": 1, "office_status": 2, "addr_country_code": "NLD", "addr_country": "Netherlands"})
+        self._local_office_data.append({"office_id": 7, "office_name": "Port of Hamburg", "office_type": 1, "office_status": 2, "addr_country_code": "DEU", "addr_country": "Deutchsland"})
+        self._local_office_data.append({"office_id": 8, "office_name": "Jurong Port", "office_type": 1, "office_status": 2, "addr_country_code": "SGP", "addr_country": "Singapore"})
+        self._local_office_data.append({"office_id": 9, "office_name": "Laem Chabang Port", "office_type": 1, "office_status": 2, "addr_country_code": "THA", "addr_country": "Thailand"})
+        self._local_office_data.append({"office_id": 10, "office_name": "Port of Mumbai", "office_type": 1, "office_status": 2, "addr_country_code": "IND", "addr_country": "Republic of India"})
 
     def GetOffice(self, office_id: int):
         #Return an existing office. If the office_id doesn't exist return OfficeNotFound error
@@ -55,7 +55,7 @@ class OfficeBuilder(BaseBuilder):
                 baseOffice.addr_line4 = ""
                 baseOffice.addr_city = ""
                 baseOffice.addr_country_subdivision = ""
-                baseOffice.addr_country = ""
+                baseOffice.addr_country = office["addr_country"]
                 baseOffice.addr_country_code = office["addr_country_code"]
                 baseOffice.addr_postal_code = ""
 

@@ -3,7 +3,9 @@ from enum import Enum
 
 import mimesis
 from data_engine.builders.basebuilder import BaseBuilder
+from data_engine.builders.officebuilder import OfficeBuilder
 from data_engine.classes.basecustomer import BaseCustomer
+from data_engine.classes.baseoffice import BaseOffice
 from mimesis import Person, Address, Datetime
 from mimesis.locales import Locale 
 from mimesis.enums import Gender
@@ -17,10 +19,26 @@ class CustomerBuilder(BaseBuilder):
 
 
     def NewCustomer(self, office_code: int = 0, cust_type: int = 0, gender: int = 0):
+        
+
+        #Determine which office this customer originates from
+        ob = OfficeBuilder()
+        new_cust_office: BaseOffice = None
+
+        if office_code == 0:
+            #generate a random office
+            new_cust_office = ob.GetRandomOffice()
+
+        else:
+            new_cust_office = ob.GetOffice(office_code)
+
+        #Determine the Mimesis Locale value to use for this customer based on the office
+        ml: Locale = super().determine_mimesis_locale(new_cust_office.addr_country_code)
+
         #Instantiate Mimesis objects
-        mp = Person()
-        ma = Address()
-        md = mimesis.Datetime()
+        mp = Person(ml)
+        ma = Address(ml)
+        md = mimesis.Datetime(ml)
 
         #Determine the gender of the new customer
         new_cust_gender: Enum = None
@@ -56,6 +74,8 @@ class CustomerBuilder(BaseBuilder):
                 #Nothing was matched - throw an error
                 raise super().throw_invalid_parm_value_exception("cust_type")
         
+        
+        
         #Determine the verification type for the new customer
         new_cust_verify_status = super().random_from_enum(VerifyStatus)
         
@@ -74,8 +94,8 @@ class CustomerBuilder(BaseBuilder):
         baseCustomer.addr_line4=""
         baseCustomer.addr_city=ma.city()
         baseCustomer.addr_country_subdivision=ma.state()
-        baseCustomer.addr_country=ma.country()
-        baseCustomer.addr_country_code=ma.country_code()
+        baseCustomer.addr_country=new_cust_office.addr_country
+        baseCustomer.addr_country_code=new_cust_office.addr_country_code
         baseCustomer.addr_postal_code=ma.postal_code()
         baseCustomer.verify_status=new_cust_verify_status.value
 

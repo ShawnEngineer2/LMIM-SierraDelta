@@ -1,17 +1,8 @@
-from data_engine.builders.officebuilder import OfficeBuilder
-from data_engine.classes import baseoffice
-from os import system as sys
+from data_engine.integrations.country_list_api import CountryListAPI
 
+cl_api = CountryListAPI()
 
-sys("clear")
-
-ob = OfficeBuilder()
-
-office: baseoffice = ob.GetRandomOffice()
-
-#office: baseoffice = ob.GetOffice(15)
-
-print(office.office_name)
+cl_api.GetStatesForCountryID(99)
 
 print("Done")
 
